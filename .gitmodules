@@ -1,0 +1,18 @@
+[submodule "freestnd-c-hdrs"]
+	path = freestnd-c-hdrs
+	url = https://codeberg.org/OSDev/freestnd-c-hdrs-0bsd.git
+[submodule "cc-runtime"]
+	path = cc-runtime
+	url = https://codeberg.org/OSDev/cc-runtime.git
+[submodule "picoefi"]
+	path = picoefi
+	url = https://codeberg.org/PicoEFI/PicoEFI.git
+[submodule "nanoprintf"]
+	path = nanoprintf
+	url = https://github.com/charlesnicholson/nanoprintf.git
+[submodule "seabios"]
+	path = seabios
+	url = https://github.com/FlyGoat/seabios-csmwrap.git
+[submodule "uACPI"]
+	path = uACPI
+	url = https://github.com/uACPI/uACPI.git
