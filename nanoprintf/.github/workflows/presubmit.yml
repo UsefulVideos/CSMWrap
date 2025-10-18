@@ -1,0 +1,238 @@
+name: Presubmit Checks
+
+on:
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 2 * * 0'  # Weekly
+  workflow_dispatch:
+
+permissions:
+  packages: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    container:
+      image: ghcr.io/charlesnicholson/docker-image:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pyright
+        run: python -m pyright --warnings --pythonversion 3.13 build.py tests/size_report.py
+      - name: Ruff
+        run: python -m ruff check build.py tests/size_report.py
+
+  download-linux:
+    runs-on: ubuntu-latest
+
+    container:
+      image: ghcr.io/charlesnicholson/docker-image:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Build
+        run: ./b --download --paland -v
+
+  download-mac:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Build
+        run: ./b --download --paland -v
+
+  download-win:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Build
+        shell: cmd
+        run: |
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
+          python.exe build.py --download --paland -v
+
+
+  sanitizers:
+    runs-on: ubuntu-latest
+
+    container:
+      image: ghcr.io/charlesnicholson/docker-image:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    strategy:
+      matrix:
+        sanitizer: [ubsan, asan]
+        architecture: [32, 64]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Build
+        env:
+          CC: /usr/bin/clang
+          CXX: /usr/bin/clang++
+        run: ./b --arch ${{ matrix.architecture }} --${{ matrix.sanitizer }} --paland -v
+
+  linux-x64:
+    runs-on: ubuntu-latest
+
+    container:
+      image: ghcr.io/charlesnicholson/docker-image:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    strategy:
+      matrix:
+        compiler: [gcc, clang]
+        configuration: [Debug, Release]
+        architecture: [32, 64]
+        include:
+        - compiler: gcc
+          cc: gcc
+          cxx: g++
+        - compiler: clang
+          cc: clang
+          cxx: clang++
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Build
+        env:
+          CC: ${{ matrix.cc }}
+          CXX: ${{ matrix.cxx }}
+        run: ./b --cfg ${{ matrix.configuration }} --arch ${{ matrix.architecture }} --paland -v
+
+  linux-arm64:
+    runs-on: ubuntu-24.04-arm
+
+    container:
+      image: ghcr.io/charlesnicholson/docker-image:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    strategy:
+      matrix:
+        compiler: [gcc, clang]
+        configuration: [Debug, Release]
+        include:
+        - compiler: gcc
+          cc: gcc
+          cxx: g++
+        - compiler: clang
+          cc: clang
+          cxx: clang++
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Build
+        env:
+          CC: ${{ matrix.cc }}
+          CXX: ${{ matrix.cxx }}
+        run: ./b --cfg ${{ matrix.configuration }} --arch 64 --paland -v
+
+  macos:
+    runs-on: macos-latest
+
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Build
+        run: ./b --cfg ${{ matrix.configuration }} --paland -v
+
+  win:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+        architecture: [32, 64]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Build
+        shell: cmd
+        run: |
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars${{ matrix.architecture }}.bat"
+          python.exe build.py --cfg ${{ matrix.configuration }} --paland -v --arch ${{ matrix.architecture }}
+
+  size-reports:
+    runs-on: ubuntu-latest
+
+    container:
+      image: ghcr.io/charlesnicholson/docker-image:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: AVR2
+        shell: bash
+        run: python tests/size_report.py -p avr2
+
+      - name: AVR5
+        shell: bash
+        run: python tests/size_report.py -p avr5
+
+      - name: Cortex-M0
+        shell: bash
+        run: python tests/size_report.py -p cm0
+
+      - name: Cortex-M4
+        shell: bash
+        run: python tests/size_report.py -p cm4
+
+      - name: Linux x64
+        shell: bash
+        run: python tests/size_report.py -p host
+
+  all-checks-pass:
+    needs: [lint, download-linux, download-mac, download-win, sanitizers, linux-x64, linux-arm64, macos, win, size-reports]
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo Done
+

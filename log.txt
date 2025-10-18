@@ -1,0 +1,299 @@
+In file included from seabios/src/farptr.h:9,
+                 from src/../seabios/vgasrc/vgabios.h:5,
+                 from src/../seabios/vgasrc/cbvga_palette_emulator.h:9:
+seabios/src/x86.h:96:19: error: conflicting types for ‘rdmsr’; have ‘u64(u32)’ {aka ‘long long unsigned int(unsigned int)’}
+   96 | static inline u64 rdmsr(u32 index)
+      |                   ^~~~~
+In file included from src/csmwrap.c:4:
+src/io.h:283:24: note: previous definition of ‘rdmsr’ with type ‘uint64_t(uint32_t)’ {aka ‘long unsigned int(unsigned int)’}
+  283 | static inline uint64_t rdmsr(uint32_t index) {
+      |                        ^~~~~
+seabios/src/x86.h:103:20: error: conflicting types for ‘wrmsr’; have ‘void(u32,  u64)’ {aka ‘void(unsigned int,  long long unsigned int)’}
+  103 | static inline void wrmsr(u32 index, u64 val)
+      |                    ^~~~~
+src/io.h:289:20: note: previous definition of ‘wrmsr’ with type ‘void(uint32_t,  uint64_t)’ {aka ‘void(unsigned int,  long unsigned int)’}
+  289 | static inline void wrmsr(uint32_t index, uint64_t val) {
+      |                    ^~~~~
+src/io.h:49:31: error: expected declaration specifiers or ‘...’ before ‘(’ token
+   49 |         (__builtin_constant_p(((int)port)) && ((int)port) < 0x100)
+      |                               ^
+src/io.h:137:10: note: in expansion of macro ‘__use_immediate_port’
+  137 |         (__use_immediate_port(port) ? __outbc((int)port, data) : __outb((int)port, data))
+      |          ^~~~~~~~~~~~~~~~~~~~
+seabios/src/x86.h:150:20: note: in expansion of macro ‘outb’
+  150 | static inline void outb(u8 value, u16 port) {
+      |                    ^~~~
+src/io.h:49:44: error: expected ‘)’ before ‘&&’ token
+   49 |         (__builtin_constant_p(((int)port)) && ((int)port) < 0x100)
+      |                                            ^~
+src/io.h:137:10: note: in expansion of macro ‘__use_immediate_port’
+  137 |         (__use_immediate_port(port) ? __outbc((int)port, data) : __outb((int)port, data))
+      |          ^~~~~~~~~~~~~~~~~~~~
+seabios/src/x86.h:150:20: note: in expansion of macro ‘outb’
+  150 | static inline void outb(u8 value, u16 port) {
+      |                    ^~~~
+src/io.h:137:37: error: expected ‘)’ before ‘?’ token
+  137 |         (__use_immediate_port(port) ? __outbc((int)port, data) : __outb((int)port, data))
+      |                                     ^
+seabios/src/x86.h:150:20: note: in expansion of macro ‘outb’
+  150 | static inline void outb(u8 value, u16 port) {
+      |                    ^~~~
+src/io.h:49:31: error: expected declaration specifiers or ‘...’ before ‘(’ token
+   49 |         (__builtin_constant_p(((int)port)) && ((int)port) < 0x100)
+      |                               ^
+src/io.h:159:10: note: in expansion of macro ‘__use_immediate_port’
+  159 |         (__use_immediate_port(port) ? __outwc((int)port, data) : __outw((int)port, data))
+      |          ^~~~~~~~~~~~~~~~~~~~
+seabios/src/x86.h:153:20: note: in expansion of macro ‘outw’
+  153 | static inline void outw(u16 value, u16 port) {
+      |                    ^~~~
+src/io.h:49:44: error: expected ‘)’ before ‘&&’ token
+   49 |         (__builtin_constant_p(((int)port)) && ((int)port) < 0x100)
+      |                                            ^~
+src/io.h:159:10: note: in expansion of macro ‘__use_immediate_port’
+  159 |         (__use_immediate_port(port) ? __outwc((int)port, data) : __outw((int)port, data))
+      |          ^~~~~~~~~~~~~~~~~~~~
+seabios/src/x86.h:153:20: note: in expansion of macro ‘outw’
+  153 | static inline void outw(u16 value, u16 port) {
+      |                    ^~~~
+src/io.h:159:37: error: expected ‘)’ before ‘?’ token
+  159 |         (__use_immediate_port(port) ? __outwc((int)port, data) : __outw((int)port, data))
+      |                                     ^
+seabios/src/x86.h:153:20: note: in expansion of macro ‘outw’
+  153 | static inline void outw(u16 value, u16 port) {
+      |                    ^~~~
+src/io.h:49:31: error: expected declaration specifiers or ‘...’ before ‘(’ token
+   49 |         (__builtin_constant_p(((int)port)) && ((int)port) < 0x100)
+      |                               ^
+src/io.h:181:10: note: in expansion of macro ‘__use_immediate_port’
+  181 |         (__use_immediate_port(port) ? __outlc((int)port, data) : __outl((int)port, data))
+      |          ^~~~~~~~~~~~~~~~~~~~
+seabios/src/x86.h:156:20: note: in expansion of macro ‘outl’
+  156 | static inline void outl(u32 value, u16 port) {
+      |                    ^~~~
+src/io.h:49:44: error: expected ‘)’ before ‘&&’ token
+   49 |         (__builtin_constant_p(((int)port)) && ((int)port) < 0x100)
+      |                                            ^~
+src/io.h:181:10: note: in expansion of macro ‘__use_immediate_port’
+  181 |         (__use_immediate_port(port) ? __outlc((int)port, data) : __outl((int)port, data))
+      |          ^~~~~~~~~~~~~~~~~~~~
+seabios/src/x86.h:156:20: note: in expansion of macro ‘outl’
+  156 | static inline void outl(u32 value, u16 port) {
+      |                    ^~~~
+src/io.h:181:37: error: expected ‘)’ before ‘?’ token
+  181 |         (__use_immediate_port(port) ? __outlc((int)port, data) : __outl((int)port, data))
+      |                                     ^
+seabios/src/x86.h:156:20: note: in expansion of macro ‘outl’
+  156 | static inline void outl(u32 value, u16 port) {
+      |                    ^~~~
+src/io.h:49:31: error: expected declaration specifiers or ‘...’ before ‘(’ token
+   49 |         (__builtin_constant_p(((int)port)) && ((int)port) < 0x100)
+      |                               ^
+src/io.h:59:10: note: in expansion of macro ‘__use_immediate_port’
+   59 |         (__use_immediate_port((int)port) ? __inbc((int)port) : __inb((int)port))
+      |          ^~~~~~~~~~~~~~~~~~~~
+seabios/src/x86.h:159:18: note: in expansion of macro ‘inb’
+  159 | static inline u8 inb(u16 port) {
+      |                  ^~~
+src/io.h:49:44: error: expected ‘)’ before ‘&&’ token
+   49 |         (__builtin_constant_p(((int)port)) && ((int)port) < 0x100)
+      |                                            ^~
+src/io.h:59:10: note: in expansion of macro ‘__use_immediate_port’
+   59 |         (__use_immediate_port((int)port) ? __inbc((int)port) : __inb((int)port))
+      |          ^~~~~~~~~~~~~~~~~~~~
+seabios/src/x86.h:159:18: note: in expansion of macro ‘inb’
+  159 | static inline u8 inb(u16 port) {
+      |                  ^~~
+src/io.h:59:42: error: expected ‘)’ before ‘?’ token
+   59 |         (__use_immediate_port((int)port) ? __inbc((int)port) : __inb((int)port))
+      |                                          ^
+seabios/src/x86.h:159:18: note: in expansion of macro ‘inb’
+  159 | static inline u8 inb(u16 port) {
+      |                  ^~~
+src/io.h:49:31: error: expected declaration specifiers or ‘...’ before ‘(’ token
+   49 |         (__builtin_constant_p(((int)port)) && ((int)port) < 0x100)
+      |                               ^
+src/io.h:85:10: note: in expansion of macro ‘__use_immediate_port’
+   85 |         (__use_immediate_port((int)port) ? __inwc((int)port) : __inw((int)port))
+      |          ^~~~~~~~~~~~~~~~~~~~
+seabios/src/x86.h:164:19: note: in expansion of macro ‘inw’
+  164 | static inline u16 inw(u16 port) {
+      |                   ^~~
+src/io.h:49:44: error: expected ‘)’ before ‘&&’ token
+   49 |         (__builtin_constant_p(((int)port)) && ((int)port) < 0x100)
+      |                                            ^~
+src/io.h:85:10: note: in expansion of macro ‘__use_immediate_port’
+   85 |         (__use_immediate_port((int)port) ? __inwc((int)port) : __inw((int)port))
+      |          ^~~~~~~~~~~~~~~~~~~~
+seabios/src/x86.h:164:19: note: in expansion of macro ‘inw’
+  164 | static inline u16 inw(u16 port) {
+      |                   ^~~
+src/io.h:85:42: error: expected ‘)’ before ‘?’ token
+   85 |         (__use_immediate_port((int)port) ? __inwc((int)port) : __inw((int)port))
+      |                                          ^
+seabios/src/x86.h:164:19: note: in expansion of macro ‘inw’
+  164 | static inline u16 inw(u16 port) {
+      |                   ^~~
+src/io.h:49:31: error: expected declaration specifiers or ‘...’ before ‘(’ token
+   49 |         (__builtin_constant_p(((int)port)) && ((int)port) < 0x100)
+      |                               ^
+src/io.h:111:10: note: in expansion of macro ‘__use_immediate_port’
+  111 |         (__use_immediate_port(port) ? __inlc((int)port) : __inl((int)port))
+      |          ^~~~~~~~~~~~~~~~~~~~
+seabios/src/x86.h:169:19: note: in expansion of macro ‘inl’
+  169 | static inline u32 inl(u16 port) {
+      |                   ^~~
+src/io.h:49:44: error: expected ‘)’ before ‘&&’ token
+   49 |         (__builtin_constant_p(((int)port)) && ((int)port) < 0x100)
+      |                                            ^~
+src/io.h:111:10: note: in expansion of macro ‘__use_immediate_port’
+  111 |         (__use_immediate_port(port) ? __inlc((int)port) : __inl((int)port))
+      |          ^~~~~~~~~~~~~~~~~~~~
+seabios/src/x86.h:169:19: note: in expansion of macro ‘inl’
+  169 | static inline u32 inl(u16 port) {
+      |                   ^~~
+src/io.h:111:37: error: expected ‘)’ before ‘?’ token
+  111 |         (__use_immediate_port(port) ? __inlc((int)port) : __inl((int)port))
+      |                                     ^
+seabios/src/x86.h:169:19: note: in expansion of macro ‘inl’
+  169 | static inline u32 inl(u16 port) {
+      |                   ^~~
+seabios/src/x86.h:175:20: error: conflicting types for ‘insb’; have ‘void(u16,  u8 *, u32)’ {aka ‘void(short unsigned int,  unsigned char *, unsigned int)’}
+  175 | static inline void insb(u16 port, u8 *data, u32 count) {
+      |                    ^~~~
+src/io.h:78:1: note: previous definition of ‘insb’ with type ‘void(int,  void *, int)’
+   78 | insb(int port, void *addr, int cnt)
+      | ^~~~
+seabios/src/x86.h:179:20: error: conflicting types for ‘insw’; have ‘void(u16,  u16 *, u32)’ {aka ‘void(short unsigned int,  short unsigned int *, unsigned int)’}
+  179 | static inline void insw(u16 port, u16 *data, u32 count) {
+      |                    ^~~~
+src/io.h:104:1: note: previous definition of ‘insw’ with type ‘void(int,  void *, int)’
+  104 | insw(int port, void *addr, int cnt)
+      | ^~~~
+seabios/src/x86.h:183:20: error: conflicting types for ‘insl’; have ‘void(u16,  u32 *, u32)’ {aka ‘void(short unsigned int,  unsigned int *, unsigned int)’}
+  183 | static inline void insl(u16 port, u32 *data, u32 count) {
+      |                    ^~~~
+src/io.h:130:1: note: previous definition of ‘insl’ with type ‘void(int,  void *, int)’
+  130 | insl(int port, void *addr, int cnt)
+      | ^~~~
+seabios/src/x86.h:188:20: error: conflicting types for ‘outsb’; have ‘void(u16,  u8 *, u32)’ {aka ‘void(short unsigned int,  unsigned char *, unsigned int)’}
+  188 | static inline void outsb(u16 port, u8 *data, u32 count) {
+      |                    ^~~~~
+src/io.h:152:1: note: previous definition of ‘outsb’ with type ‘void(int,  const void *, int)’
+  152 | outsb(int port, const void *addr, int cnt)
+      | ^~~~~
+seabios/src/x86.h:192:20: error: conflicting types for ‘outsw’; have ‘void(u16,  u16 *, u32)’ {aka ‘void(short unsigned int,  short unsigned int *, unsigned int)’}
+  192 | static inline void outsw(u16 port, u16 *data, u32 count) {
+      |                    ^~~~~
+src/io.h:174:1: note: previous definition of ‘outsw’ with type ‘void(int,  const void *, int)’
+  174 | outsw(int port, const void *addr, int cnt)
+      | ^~~~~
+seabios/src/x86.h:196:20: error: conflicting types for ‘outsl’; have ‘void(u16,  u32 *, u32)’ {aka ‘void(short unsigned int,  unsigned int *, unsigned int)’}
+  196 | static inline void outsl(u16 port, u32 *data, u32 count) {
+      |                    ^~~~~
+src/io.h:196:1: note: previous definition of ‘outsl’ with type ‘void(int,  const void *, int)’
+  196 | outsl(int port, const void *addr, int cnt)
+      | ^~~~~
+seabios/src/x86.h:209:20: error: redefinition of ‘writel’
+  209 | static inline void writel(void *addr, u32 val) {
+      |                    ^~~~~~
+src/io.h:13:20: note: previous definition of ‘writel’ with type ‘void(void *, uint32_t)’ {aka ‘void(void *, unsigned int)’}
+   13 | static inline void writel(void *addr, uint32_t val) {
+      |                    ^~~~~~
+seabios/src/x86.h:213:20: error: redefinition of ‘writew’
+  213 | static inline void writew(void *addr, u16 val) {
+      |                    ^~~~~~
+src/io.h:17:20: note: previous definition of ‘writew’ with type ‘void(void *, uint16_t)’ {aka ‘void(void *, short unsigned int)’}
+   17 | static inline void writew(void *addr, uint16_t val) {
+      |                    ^~~~~~
+seabios/src/x86.h:217:20: error: redefinition of ‘writeb’
+  217 | static inline void writeb(void *addr, u8 val) {
+      |                    ^~~~~~
+src/io.h:21:20: note: previous definition of ‘writeb’ with type ‘void(void *, uint8_t)’ {aka ‘void(void *, unsigned char)’}
+   21 | static inline void writeb(void *addr, uint8_t val) {
+      |                    ^~~~~~
+seabios/src/x86.h:221:19: error: conflicting types for ‘readq’; have ‘u64(const void *)’ {aka ‘long long unsigned int(const void *)’}
+  221 | static inline u64 readq(const void *addr) {
+      |                   ^~~~~
+src/io.h:25:24: note: previous definition of ‘readq’ with type ‘uint64_t(const void *)’ {aka ‘long unsigned int(const void *)’}
+   25 | static inline uint64_t readq(const void *addr) {
+      |                        ^~~~~
+seabios/src/x86.h:226:19: error: redefinition of ‘readl’
+  226 | static inline u32 readl(const void *addr) {
+      |                   ^~~~~
+src/io.h:30:24: note: previous definition of ‘readl’ with type ‘uint32_t(const void *)’ {aka ‘unsigned int(const void *’}
+   30 | static inline uint32_t readl(const void *addr) {
+      |                        ^~~~~
+seabios/src/x86.h:231:19: error: redefinition of ‘readw’
+  231 | static inline u16 readw(const void *addr) {
+      |                   ^~~~~
+src/io.h:35:24: note: previous definition of ‘readw’ with type ‘uint16_t(const void *)’ {aka ‘short unsigned int(const void *)’}
+   35 | static inline uint16_t readw(const void *addr) {
+      |                        ^~~~~
+seabios/src/x86.h:236:18: error: redefinition of ‘readb’
+  236 | static inline u8 readb(const void *addr) {
+      |                  ^~~~~
+src/io.h:40:23: note: previous definition of ‘readb’ with type ‘uint8_t(const void *)’ {aka ‘unsigned char(const void *’}
+   40 | static inline uint8_t readb(const void *addr) {
+      |                       ^~~~~
+seabios/src/x86.h: In function ‘set_a20’:
+src/io.h:49:59: warning: comparison is always true due to limited range of data type [-Wtype-limits]
+   49 |         (__builtin_constant_p(((int)port)) && ((int)port) < 0x100)
+      |                                                           ^
+src/io.h:137:10: note: in expansion of macro ‘__use_immediate_port’
+  137 |         (__use_immediate_port(port) ? __outbc((int)port, data) : __outb((int)port, data))
+      |          ^~~~~~~~~~~~~~~~~~~~
+seabios/src/x86.h:275:9: note: in expansion of macro ‘outb’
+  275 |         outb(val ^ A20_ENABLE_BIT, PORT_A20);
+      |         ^~~~
+seabios/src/farptr.h: In function ‘FLATPTR_TO_SEGOFF’:
+seabios/src/farptr.h:135:32: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+  135 | #define FLATPTR_TO_OFFSET(p) (((u32)(p)) & 0xf)
+      |                                ^
+seabios/src/farptr.h:199:58: note: in definition of macro ‘SEGOFF’
+  199 | #define SEGOFF(s,o) ({struct segoff_s __so; __so.offset=(o); __so.seg=(s); __so;})
+      |                                                          ^
+seabios/src/farptr.h:202:38: note: in expansion of macro ‘FLATPTR_TO_OFFSET’
+  202 |     return SEGOFF(FLATPTR_TO_SEG(p), FLATPTR_TO_OFFSET(p));
+      |                                      ^~~~~~~~~~~~~~~~~
+seabios/src/farptr.h:134:29: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+  134 | #define FLATPTR_TO_SEG(p) (((u32)(p)) >> 4)
+      |                             ^
+seabios/src/farptr.h:199:72: note: in definition of macro ‘SEGOFF’
+  199 | #define SEGOFF(s,o) ({struct segoff_s __so; __so.offset=(o); __so.seg=(s); __so;})
+      |                                                                        ^
+seabios/src/farptr.h:202:19: note: in expansion of macro ‘FLATPTR_TO_SEG’
+  202 |     return SEGOFF(FLATPTR_TO_SEG(p), FLATPTR_TO_OFFSET(p));
+      |                   ^~~~~~~~~~~~~~
+seabios/src/farptr.h: In function ‘SEGOFF_TO_FLATPTR’:
+seabios/src/farptr.h:136:32: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+  136 | #define MAKE_FLATPTR(seg,off) ((void*)(((u32)(seg)<<4)+(u32)(off)))
+      |                                ^
+seabios/src/farptr.h:205:12: note: in expansion of macro ‘MAKE_FLATPTR’
+  205 |     return MAKE_FLATPTR(so.seg, so.offset);
+      |            ^~~~~~~~~~~~
+seabios/src/farptr.h: In function ‘flatptr_ok’:
+seabios/src/farptr.h:210:9: error: ‘MODE16’ undeclared (first use in this function)
+  210 |     if (MODE16 == 0 && MODESEGMENT == 1)
+      |         ^~~~~~
+seabios/src/farptr.h:210:9: note: each undeclared identifier is reported only once for each function it appears in
+seabios/src/farptr.h:210:24: error: ‘MODESEGMENT’ undeclared (first use in this function)
+  210 |     if (MODE16 == 0 && MODESEGMENT == 1)
+      |                        ^~~~~~~~~~~
+src/../seabios/vgasrc/vgabios.h: In function ‘vga_emulate_text’:
+seabios/src/farptr.h:136:56: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+  136 | #define MAKE_FLATPTR(seg,off) ((void*)(((u32)(seg)<<4)+(u32)(off)))
+      |                                                        ^
+seabios/src/farptr.h:180:24: note: in expansion of macro ‘MAKE_FLATPTR’
+  180 |     (*((typeof(&(var)))MAKE_FLATPTR((seg), &(var))))
+      |                        ^~~~~~~~~~~~
+src/../seabios/vgasrc/vgabios.h:61:5: note: in expansion of macro ‘GET_FARVAR’
+   61 |     GET_FARVAR(SEG_BDA, ((struct vga_bda_s *)VGA_CUSTOM_BDA)->var)
+      |     ^~~~~~~~~~
+src/../seabios/vgasrc/vgabios.h:68:39: note: in expansion of macro ‘GET_BDA_EXT’
+   68 |     return CONFIG_VGA_EMULATE_TEXT && GET_BDA_EXT(flags) & BF_EMULATE_TEXT;
+      |                                       ^~~~~~~~~~~
+make[1]: *** [GNUmakefile:227: obj-x86_64/src/csmwrap.c.o] Error 1
+make[1]: Leaving directory '/mnt/d/GitHub_Projects/CSMWrap'
+make: *** [GNUmakefile:201: all] Error 2
+D:\GitHub_Projects>
